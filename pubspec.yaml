@@ -1,6 +1,6 @@
 name: persian_datetimepickers
 description: A valuable and straightforward package that supports Jalali(Farsi | Persian) and the Gregorian date and time pickers.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/gabrimatic/persian_datetimepickers
 
 environment:

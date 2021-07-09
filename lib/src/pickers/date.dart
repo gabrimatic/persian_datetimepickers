@@ -50,117 +50,124 @@ Future<DateTime?> showPersianDatePicker({
   await showDialog(
     context: context,
     builder: (context) {
-      return AlertDialog(
-        title: Text(isJalali ? 'انتخاب تاریخ' : 'Pick a date'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: Text(
-              isJalali ? 'لغو' : 'Cancel',
-              style: TextStyle(
-                color: Colors.black,
+      return Directionality(
+        textDirection: isJalali ? TextDirection.rtl : TextDirection.ltr,
+        child: AlertDialog(
+          title: Text(
+            isJalali ? 'انتخاب تاریخ' : 'Pick a date',
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: Text(
+                isJalali ? 'لغو' : 'Cancel',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              if (isJalali) {
-                picked =
-                    Gregorian.fromJalali(Jalali(year, month, day)).toDateTime();
-              } else {
-                picked = DateTime(year, month, day);
-              }
+            TextButton(
+              onPressed: () {
+                if (isJalali) {
+                  picked = Gregorian.fromJalali(Jalali(year, month, day))
+                      .toDateTime();
+                } else {
+                  picked = DateTime(year, month, day);
+                }
 
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: Text(
-              isJalali ? 'ثبت' : 'Save',
-              style: TextStyle(
-                color: Colors.blue,
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: Text(
+                isJalali ? 'ثبت' : 'Save',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
               ),
             ),
-          ),
-        ],
-        content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-          return Directionality(
-            textDirection: isJalali ? TextDirection.ltr : TextDirection.rtl,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        isJalali ? 'سال' : 'Year',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      NumberPicker(
-                        haptics: true,
-                        infiniteLoop: true,
-                        value: year,
-                        minValue: isJalali ? 1300 : 1900,
-                        maxValue: isJalali ? 1500 : 2100,
-                        onChanged: (value) => setState(() => year = value),
-                      ),
-                    ],
+          ],
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return Directionality(
+              textDirection: isJalali ? TextDirection.ltr : TextDirection.rtl,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          isJalali ? 'سال' : 'Year',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        NumberPicker(
+                          haptics: true,
+                          infiniteLoop: true,
+                          value: year,
+                          minValue: isJalali ? 1300 : 1900,
+                          maxValue: isJalali ? 1500 : 2100,
+                          onChanged: (value) => setState(() => year = value),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 28),
-                  child: const Text(
-                    '/',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Container(
+                    margin: const EdgeInsets.only(top: 28),
+                    child: const Text(
+                      '/',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        isJalali ? 'ماه' : 'Month',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      NumberPicker(
-                        value: month,
-                        minValue: 1,
-                        maxValue: 12,
-                        onChanged: (value) => setState(() => month = value),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          isJalali ? 'ماه' : 'Month',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        NumberPicker(
+                          value: month,
+                          minValue: 1,
+                          maxValue: 12,
+                          onChanged: (value) => setState(() => month = value),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 28),
-                  child: const Text(
-                    '/',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Container(
+                    margin: const EdgeInsets.only(top: 28),
+                    child: const Text(
+                      '/',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        isJalali ? 'روز' : 'Day',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      NumberPicker(
-                        value: day,
-                        minValue: 1,
-                        maxValue: 31,
-                        onChanged: (value) => setState(() => day = value),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          isJalali ? 'روز' : 'Day',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        NumberPicker(
+                          value: day,
+                          minValue: 1,
+                          maxValue: 31,
+                          onChanged: (value) => setState(() => day = value),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }),
+                ],
+              ),
+            );
+          }),
+        ),
       );
     },
   );

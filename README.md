@@ -2,6 +2,7 @@
 ###### LIGHTWEIGHT - SIMPLE
 
 ---
+![Time](https://github.com/gabrimatic/persian_datetimepickers/blob/master/example/time.png "Time") ![Date](https://github.com/gabrimatic/persian_datetimepickers/blob/master/example/date.png "Date")
 
 #### How to use it?
 
@@ -10,7 +11,7 @@
 
 ```yaml
 dependencies:
-  persian_datetimepickers: ^1.0.0
+  persian_datetimepickers: ^1.0.1
 ```
 
 **2. Import package:**
