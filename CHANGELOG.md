@@ -1,5 +1,11 @@
 ---
 
+### 1.0.1+1
+
+- readme screenshots size fixed
+
+---
+
 ### 1.0.1
 
 - toPersianDate extension added

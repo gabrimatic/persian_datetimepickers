@@ -2,7 +2,7 @@
 ###### LIGHTWEIGHT - SIMPLE
 
 ---
-![Time](https://github.com/gabrimatic/persian_datetimepickers/blob/master/example/time.png "Time") ![Date](https://github.com/gabrimatic/persian_datetimepickers/blob/master/example/date.png "Date")
+<img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/time.png" width="320"/> <img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/date.png" width="320"/>
 
 #### How to use it?
 
