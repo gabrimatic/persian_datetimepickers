@@ -1,0 +1,17 @@
+name: persian_datetimepickers_example
+description: A valuable and straightforward package that supports Jalali(Farsi | Persian) and the gregorian date and time pickers and converters.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  persian_datetimepickers:
+    path: ../
+
+flutter:
+  uses-material-design: true
