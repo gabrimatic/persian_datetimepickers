@@ -20,6 +20,7 @@ Future<DateTime?> showPersianDatePicker({
   required BuildContext context,
   DateTime? initialDate,
   bool isJalali = true,
+  Color color = Colors.blue,
 }) async {
   DateTime? picked;
 
@@ -46,6 +47,72 @@ Future<DateTime?> showPersianDatePicker({
       : (initialDate == null
           ? Gregorian.now().day
           : Gregorian.fromDateTime(initialDate).day);
+
+  final materialColor = MaterialColor(
+    color.value,
+    {
+      50: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .1,
+      ),
+      100: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .2,
+      ),
+      200: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .3,
+      ),
+      300: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .4,
+      ),
+      400: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .5,
+      ),
+      500: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .6,
+      ),
+      600: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .7,
+      ),
+      700: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .8,
+      ),
+      800: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .9,
+      ),
+      900: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        1,
+      ),
+    },
+  );
 
   await showDialog(
     context: context,
@@ -84,7 +151,7 @@ Future<DateTime?> showPersianDatePicker({
               child: Text(
                 isJalali ? 'ثبت' : 'Save',
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: color,
                 ),
               ),
             ),
@@ -104,13 +171,18 @@ Future<DateTime?> showPersianDatePicker({
                           isJalali ? 'سال' : 'Year',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        NumberPicker(
-                          haptics: true,
-                          infiniteLoop: true,
-                          value: year,
-                          minValue: isJalali ? 1300 : 1900,
-                          maxValue: isJalali ? 1500 : 2100,
-                          onChanged: (value) => setState(() => year = value),
+                        Theme(
+                          data: ThemeData(
+                            primarySwatch: materialColor,
+                          ),
+                          child: NumberPicker(
+                            haptics: true,
+                            infiniteLoop: true,
+                            value: year,
+                            minValue: isJalali ? 1300 : 1900,
+                            maxValue: isJalali ? 1500 : 2100,
+                            onChanged: (value) => setState(() => year = value),
+                          ),
                         ),
                       ],
                     ),
@@ -130,11 +202,16 @@ Future<DateTime?> showPersianDatePicker({
                           isJalali ? 'ماه' : 'Month',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        NumberPicker(
-                          value: month,
-                          minValue: 1,
-                          maxValue: 12,
-                          onChanged: (value) => setState(() => month = value),
+                        Theme(
+                          data: ThemeData(
+                            primarySwatch: materialColor,
+                          ),
+                          child: NumberPicker(
+                            value: month,
+                            minValue: 1,
+                            maxValue: 12,
+                            onChanged: (value) => setState(() => month = value),
+                          ),
                         ),
                       ],
                     ),
@@ -154,11 +231,16 @@ Future<DateTime?> showPersianDatePicker({
                           isJalali ? 'روز' : 'Day',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        NumberPicker(
-                          value: day,
-                          minValue: 1,
-                          maxValue: 31,
-                          onChanged: (value) => setState(() => day = value),
+                        Theme(
+                          data: ThemeData(
+                            primarySwatch: materialColor,
+                          ),
+                          child: NumberPicker(
+                            value: day,
+                            minValue: 1,
+                            maxValue: 31,
+                            onChanged: (value) => setState(() => day = value),
+                          ),
                         ),
                       ],
                     ),

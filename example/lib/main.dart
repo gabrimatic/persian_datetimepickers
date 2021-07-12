@@ -32,12 +32,12 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
             title: _pickedTime == null
                 ? Text('Pick a time')
                 : Text('Picked time:'),
-            trailing: _pickedTime == null
-                ? null
-                : Text('${_pickedTime!.hour}:${_pickedTime!.minute}'),
+            trailing:
+                _pickedTime == null ? null : Text(_pickedTime!.toFancyString()),
             onTap: () async {
               final time = await showPersianTimePicker(
                 context: context,
+                color: Colors.red,
               );
 
               setState(() {
@@ -53,11 +53,12 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
             trailing: _pickedDate == null
                 ? null
                 : Text(
-                    _pickedDate!.toPersianDate(),
+                    _pickedDate!.toFancyString(),
                   ),
             onTap: () async {
               final date = await showPersianDatePicker(
                 context: context,
+                color: Colors.red,
               );
 
               setState(() {

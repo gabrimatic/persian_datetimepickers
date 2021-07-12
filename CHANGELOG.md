@@ -1,5 +1,16 @@
 ---
 
+### 1.0.2
+
+- custom color added to pickers
+- new extensions:
+  - DateTime toFancyString
+  - TimeOfDay toFancyString
+  - String addExtraZero
+- example updated with new changes
+
+---
+
 ### 1.0.1+1
 
 - readme screenshots size fixed

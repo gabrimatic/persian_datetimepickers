@@ -5,11 +5,78 @@ Future<TimeOfDay?> showPersianTimePicker({
   required BuildContext context,
   TimeOfDay? initialTime,
   bool isJalali = true,
+  Color color = Colors.blue,
 }) async {
   TimeOfDay? picked;
 
   int hour = initialTime?.hour ?? TimeOfDay.now().hour;
   int minute = initialTime?.minute ?? TimeOfDay.now().minute;
+
+  final materialColor = MaterialColor(
+    color.value,
+    {
+      50: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .1,
+      ),
+      100: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .2,
+      ),
+      200: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .3,
+      ),
+      300: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .4,
+      ),
+      400: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .5,
+      ),
+      500: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .6,
+      ),
+      600: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .7,
+      ),
+      700: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .8,
+      ),
+      800: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        .9,
+      ),
+      900: Color.fromRGBO(
+        color.red,
+        color.green,
+        color.blue,
+        1,
+      ),
+    },
+  );
 
   await showDialog(
     context: context,
@@ -43,7 +110,7 @@ Future<TimeOfDay?> showPersianTimePicker({
               child: Text(
                 isJalali ? 'ثبت' : 'Save',
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: color,
                 ),
               ),
             ),
@@ -63,13 +130,18 @@ Future<TimeOfDay?> showPersianTimePicker({
                           isJalali ? 'ساعت' : 'Hour',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        NumberPicker(
-                          haptics: true,
-                          infiniteLoop: true,
-                          value: hour,
-                          minValue: 1,
-                          maxValue: 23,
-                          onChanged: (value) => setState(() => hour = value),
+                        Theme(
+                          data: ThemeData(
+                            primarySwatch: materialColor,
+                          ),
+                          child: NumberPicker(
+                            haptics: true,
+                            infiniteLoop: true,
+                            value: hour,
+                            minValue: 1,
+                            maxValue: 23,
+                            onChanged: (value) => setState(() => hour = value),
+                          ),
                         ),
                       ],
                     ),
@@ -89,11 +161,17 @@ Future<TimeOfDay?> showPersianTimePicker({
                           isJalali ? 'دقیقه' : 'Minute',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        NumberPicker(
-                          value: minute,
-                          minValue: 0,
-                          maxValue: 59,
-                          onChanged: (value) => setState(() => minute = value),
+                        Theme(
+                          data: ThemeData(
+                            primarySwatch: materialColor,
+                          ),
+                          child: NumberPicker(
+                            value: minute,
+                            minValue: 0,
+                            maxValue: 59,
+                            onChanged: (value) =>
+                                setState(() => minute = value),
+                          ),
                         ),
                       ],
                     ),

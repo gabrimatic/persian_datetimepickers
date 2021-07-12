@@ -1,4 +1,4 @@
-### Persian and gregorian time and date pickers in Flutter.
+### Persian and gregorian numeric time and date pickers in Flutter.
 ###### LIGHTWEIGHT - SIMPLE
 
 ---
@@ -11,7 +11,7 @@
 
 ```yaml
 dependencies:
-  persian_datetimepickers: ^1.0.1
+  persian_datetimepickers: ^1.0.2
 ```
 
 **2. Import package:**
