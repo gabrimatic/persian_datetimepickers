@@ -24,8 +24,8 @@ import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 ```dart
           onTap: () async {
-		  // Time picker
-            final time = await showPersianTimePicker(
+		// Time picker
+            final TimeOfDay? time = await showPersianTimePicker(
               context: context,
             );
 
@@ -34,9 +34,10 @@ import 'package:persian_datetimepickers/persian_datetimepickers.dart';
             });
 			
 			
-			// Date picker
-            final date = await showPersianDatePicker(
+		// Date picker
+            final DateTime? date = await showPersianDatePicker(
               context: context,
+              color: Colors.red,
             );
 
             setState(() {

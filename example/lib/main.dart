@@ -35,9 +35,8 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
             trailing:
                 _pickedTime == null ? null : Text(_pickedTime!.toFancyString()),
             onTap: () async {
-              final time = await showPersianTimePicker(
+              final TimeOfDay? time = await showPersianTimePicker(
                 context: context,
-                color: Colors.red,
               );
 
               setState(() {
@@ -56,7 +55,7 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
                     _pickedDate!.toFancyString(),
                   ),
             onTap: () async {
-              final date = await showPersianDatePicker(
+              final DateTime? date = await showPersianDatePicker(
                 context: context,
                 color: Colors.red,
               );

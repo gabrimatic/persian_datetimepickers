@@ -1,6 +1,6 @@
 ---
 
-### 1.0.2
+### 1.0.2+1
 
 - custom color added to pickers
 - new extensions:
