@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:shamsi_date/extensions.dart';
+import 'package:shamsi_date/shamsi_date.dart';
+
+import '../../persian_datetimepickers.dart';
+import '../utils/utils.dart';
 
 Future<int?> showPersianDatePickerTimestamp({
   required BuildContext context,
   DateTime? initialDate,
   bool isJalali = true,
+  PersianDateTimeStyle? persianDateTimeStyle,
 }) async {
   final picked = await showPersianDatePicker(
     context: context,
     initialDate: initialDate,
     isJalali: isJalali,
+    persianDateTimeStyle: persianDateTimeStyle,
   );
 
-  return picked == null ? null : picked.millisecondsSinceEpoch;
+  return picked?.millisecondsSinceEpoch;
 }
 
 Future<DateTime?> showPersianDatePicker({
   required BuildContext context,
   DateTime? initialDate,
   bool isJalali = true,
-  Color color = Colors.blue,
+  PersianDateTimeStyle? persianDateTimeStyle,
 }) async {
   DateTime? picked;
+  final style = persianDateTimeStyle ??= PersianDateTimeStyle(
+    color: Theme.of(context).colorScheme.secondary,
+  )..saveButtonTextColor = Theme.of(context).colorScheme.secondary;
 
   int year = isJalali
       ? (initialDate == null
@@ -48,72 +56,6 @@ Future<DateTime?> showPersianDatePicker({
           ? Gregorian.now().day
           : Gregorian.fromDateTime(initialDate).day);
 
-  final materialColor = MaterialColor(
-    color.value,
-    {
-      50: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .1,
-      ),
-      100: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .2,
-      ),
-      200: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .3,
-      ),
-      300: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .4,
-      ),
-      400: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .5,
-      ),
-      500: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .6,
-      ),
-      600: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .7,
-      ),
-      700: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .8,
-      ),
-      800: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .9,
-      ),
-      900: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        1,
-      ),
-    },
-  );
-
   await showDialog(
     context: context,
     builder: (context) {
@@ -122,7 +64,7 @@ Future<DateTime?> showPersianDatePicker({
         child: AlertDialog(
           title: Text(
             isJalali ? 'انتخاب تاریخ' : 'Pick a date',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: style.headingStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -132,9 +74,7 @@ Future<DateTime?> showPersianDatePicker({
               },
               child: Text(
                 isJalali ? 'لغو' : 'Cancel',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
+                style: style.cancelButtonTextStyle,
               ),
             ),
             TextButton(
@@ -150,9 +90,7 @@ Future<DateTime?> showPersianDatePicker({
               },
               child: Text(
                 isJalali ? 'ثبت' : 'Save',
-                style: TextStyle(
-                  color: color,
-                ),
+                style: style.saveButtonTextStyle,
               ),
             ),
           ],
@@ -169,16 +107,17 @@ Future<DateTime?> showPersianDatePicker({
                       children: <Widget>[
                         Text(
                           isJalali ? 'سال' : 'Year',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: style.titleStyle,
                         ),
                         Theme(
                           data: ThemeData(
-                            primarySwatch: materialColor,
+                            primarySwatch: getMaterialColor(style.color),
                           ),
                           child: NumberPicker(
                             haptics: true,
                             infiniteLoop: true,
                             value: year,
+                            textStyle: style.numbersStyle,
                             minValue: isJalali ? 1300 : 1900,
                             maxValue: isJalali ? 1500 : 2100,
                             onChanged: (value) => setState(() => year = value),
@@ -189,9 +128,9 @@ Future<DateTime?> showPersianDatePicker({
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 28),
-                    child: const Text(
+                    child: Text(
                       '/',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: style.numbersStyle,
                     ),
                   ),
                   Expanded(
@@ -200,14 +139,15 @@ Future<DateTime?> showPersianDatePicker({
                       children: <Widget>[
                         Text(
                           isJalali ? 'ماه' : 'Month',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: style.titleStyle,
                         ),
                         Theme(
                           data: ThemeData(
-                            primarySwatch: materialColor,
+                            primarySwatch: getMaterialColor(style.color),
                           ),
                           child: NumberPicker(
                             value: month,
+                            textStyle: style.numbersStyle,
                             minValue: 1,
                             maxValue: 12,
                             onChanged: (value) => setState(() => month = value),
@@ -218,9 +158,9 @@ Future<DateTime?> showPersianDatePicker({
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 28),
-                    child: const Text(
+                    child: Text(
                       '/',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: style.numbersStyle,
                     ),
                   ),
                   Expanded(
@@ -229,14 +169,15 @@ Future<DateTime?> showPersianDatePicker({
                       children: <Widget>[
                         Text(
                           isJalali ? 'روز' : 'Day',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: style.titleStyle,
                         ),
                         Theme(
                           data: ThemeData(
-                            primarySwatch: materialColor,
+                            primarySwatch: getMaterialColor(style.color),
                           ),
                           child: NumberPicker(
                             value: day,
+                            textStyle: style.numbersStyle,
                             minValue: 1,
                             maxValue: 31,
                             onChanged: (value) => setState(() => day = value),

@@ -1,15 +1,15 @@
 name: persian_datetimepickers
 description: A valuable and straightforward package that supports numeric Jalali(Farsi | Persian) and the Gregorian date and time pickers.
-version: 1.0.2+1
+version: 1.0.3
 homepage: https://github.com/gabrimatic/persian_datetimepickers
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   numberpicker: ^2.1.1
-  shamsi_date: ^0.15.0
+  shamsi_date: ^1.0.1
   flutter:
     sdk: flutter
 

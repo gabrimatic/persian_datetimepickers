@@ -1,82 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
+import '../style/style.dart';
+import '../utils/utils.dart';
+
 Future<TimeOfDay?> showPersianTimePicker({
   required BuildContext context,
   TimeOfDay? initialTime,
   bool isJalali = true,
-  Color color = Colors.blue,
+  PersianDateTimeStyle? persianDateTimeStyle,
 }) async {
   TimeOfDay? picked;
+  final style = persianDateTimeStyle ??= PersianDateTimeStyle(
+    color: Theme.of(context).colorScheme.secondary,
+  )..saveButtonTextColor = Theme.of(context).colorScheme.secondary;
 
   int hour = initialTime?.hour ?? TimeOfDay.now().hour;
   int minute = initialTime?.minute ?? TimeOfDay.now().minute;
-
-  final materialColor = MaterialColor(
-    color.value,
-    {
-      50: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .1,
-      ),
-      100: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .2,
-      ),
-      200: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .3,
-      ),
-      300: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .4,
-      ),
-      400: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .5,
-      ),
-      500: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .6,
-      ),
-      600: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .7,
-      ),
-      700: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .8,
-      ),
-      800: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        .9,
-      ),
-      900: Color.fromRGBO(
-        color.red,
-        color.green,
-        color.blue,
-        1,
-      ),
-    },
-  );
 
   await showDialog(
     context: context,
@@ -86,7 +26,7 @@ Future<TimeOfDay?> showPersianTimePicker({
         child: AlertDialog(
           title: Text(
             isJalali ? 'انتخاب ساعت' : 'Pick a time',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: style.headingStyle,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -96,9 +36,7 @@ Future<TimeOfDay?> showPersianTimePicker({
               },
               child: Text(
                 isJalali ? 'لغو' : 'Cancel',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
+                style: style.cancelButtonTextStyle,
               ),
             ),
             TextButton(
@@ -109,9 +47,7 @@ Future<TimeOfDay?> showPersianTimePicker({
               },
               child: Text(
                 isJalali ? 'ثبت' : 'Save',
-                style: TextStyle(
-                  color: color,
-                ),
+                style: style.saveButtonTextStyle,
               ),
             ),
           ],
@@ -128,15 +64,16 @@ Future<TimeOfDay?> showPersianTimePicker({
                       children: <Widget>[
                         Text(
                           isJalali ? 'ساعت' : 'Hour',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: style.titleStyle,
                         ),
                         Theme(
                           data: ThemeData(
-                            primarySwatch: materialColor,
+                            primarySwatch: getMaterialColor(style.color),
                           ),
                           child: NumberPicker(
                             haptics: true,
                             infiniteLoop: true,
+                            textStyle: style.numbersStyle,
                             value: hour,
                             minValue: 1,
                             maxValue: 23,
@@ -148,9 +85,9 @@ Future<TimeOfDay?> showPersianTimePicker({
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 26),
-                    child: const Text(
+                    child: Text(
                       ':',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: style.numbersStyle,
                     ),
                   ),
                   Expanded(
@@ -159,14 +96,15 @@ Future<TimeOfDay?> showPersianTimePicker({
                       children: <Widget>[
                         Text(
                           isJalali ? 'دقیقه' : 'Minute',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: style.titleStyle,
                         ),
                         Theme(
                           data: ThemeData(
-                            primarySwatch: materialColor,
+                            primarySwatch: getMaterialColor(style.color),
                           ),
                           child: NumberPicker(
                             value: minute,
+                            textStyle: style.numbersStyle,
                             minValue: 0,
                             maxValue: 59,
                             onChanged: (value) =>

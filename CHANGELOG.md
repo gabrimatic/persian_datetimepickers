@@ -1,33 +1,25 @@
----
+### [1.0.3]
+* Thanks to the new `PersianDateTimeStyle`, Now you can **fully customize** the theme of every element on the screen
+* Windows and Web platforms added in Example
+* **BREAKING** `color` field removed from dialogs. You have to use the `PersianDateTimeStyle` instead
 
-### 1.0.2+1
+### [1.0.2+1]
+* Custom color added to pickers
+* New extensions added:
+	*  DateTime `toFancyString`
+	* TimeOfDay `toFancyString`
+	* String `addExtraZero`
+* Example updated
 
-- custom color added to pickers
-- new extensions:
-  - DateTime toFancyString
-  - TimeOfDay toFancyString
-  - String addExtraZero
-- example updated with new changes
+### [1.0.1+1]
+* Readme screenshots size fixed
 
----
+### [1.0.1]
+* `toPersianDate` added in extensions
+* Pickers direction fixed
+* Scaffold and Appbar widgets added to example
+* Android and iOS directories created in example
+* Screenshots added to example
 
-### 1.0.1+1
-
-- readme screenshots size fixed
-
----
-
-### 1.0.1
-
-- toPersianDate extension added
-- pickers direction fixed
-- scaffold and appbar widgets added to example
-- android and ios directories created in example
-- screenshots added to example
-
----
-### 1.0.0
-
-- Support Null-Safety
-
----
+### [1.0.0]
+* Support Null-Safety

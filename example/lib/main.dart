@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 void main() {
+  ThemeData themeData = ThemeData();
+
   runApp(
     MaterialApp(
       home: const PersianDatePickersExample(),
-      debugShowCheckedModeBanner: false,
+      theme: themeData.copyWith(
+        colorScheme: themeData.colorScheme.copyWith(
+          secondary: Colors.purple,
+        ),
+      ),
     ),
   );
 }
@@ -30,8 +36,8 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
         children: <Widget>[
           ListTile(
             title: _pickedTime == null
-                ? Text('Pick a time')
-                : Text('Picked time:'),
+                ? const Text('Pick a time')
+                : const Text('Picked time:'),
             trailing:
                 _pickedTime == null ? null : Text(_pickedTime!.toFancyString()),
             onTap: () async {
@@ -47,8 +53,8 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
           const SizedBox(height: 16),
           ListTile(
             title: _pickedDate == null
-                ? Text('Pick a date')
-                : Text('Picked date:'),
+                ? const Text('Pick a date')
+                : const Text('Picked date:'),
             trailing: _pickedDate == null
                 ? null
                 : Text(
@@ -57,7 +63,6 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
             onTap: () async {
               final DateTime? date = await showPersianDatePicker(
                 context: context,
-                color: Colors.red,
               );
 
               setState(() {
