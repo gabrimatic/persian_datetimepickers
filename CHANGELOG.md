@@ -1,3 +1,6 @@
+### [1.0.3+1]
+* Pub bugs fixed
+
 ### [1.0.3]
 * Thanks to the new `PersianDateTimeStyle`, Now you can **fully customize** the theme of every element on the screen
 * Windows and Web platforms added in Example
