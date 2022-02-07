@@ -4,9 +4,7 @@
 ---
 <img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/time.png" width="320"/> <img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/date.png" width="320"/>
 
-#### How to use it?
-
----
+## How to use it?
 **1.  Add the package to pubspec.yaml dependency:**
 
 ```yaml
