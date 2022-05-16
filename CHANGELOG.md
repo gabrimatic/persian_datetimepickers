@@ -1,3 +1,8 @@
+### [1.0.3+2]
+* Updated to Flutter 3.0.0
+* Readme updated
+
+
 ### [1.0.3+1]
 * Pub bugs fixed
 
