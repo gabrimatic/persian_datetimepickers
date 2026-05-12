@@ -1,57 +1,146 @@
-### Persian and gregorian numeric time and date pickers in Flutter.
-###### LIGHTWEIGHT - SIMPLE
+# Persian Datetime Pickers
 
----
-<img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/time.png" width="320"/> <img src="https://github.com/gabrimatic/persian_datetimepickers/raw/master/example/date.png" width="320"/>
+[![pub package](https://img.shields.io/pub/v/persian_datetimepickers.svg)](https://pub.dev/packages/persian_datetimepickers)
+[![CI](https://github.com/gabrimatic/persian_datetimepickers/actions/workflows/ci.yml/badge.svg)](https://github.com/gabrimatic/persian_datetimepickers/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE)
+[![Platform: Flutter](https://img.shields.io/badge/platform-Flutter-blue.svg)]()
+[![Dart 3](https://img.shields.io/badge/Dart-3.x-blue.svg)]()
 
-## How to use it?
-**1.  Add the package to pubspec.yaml dependency:**
+Persian Datetime Pickers gives Flutter apps compact numeric date and time dialogs for Persian (Jalali) and Gregorian workflows. You use it when the standard Material date picker is too calendar-heavy and you want a small picker that stays clear in Persian, English, right-to-left, and left-to-right screens.
+
+The package returns normal Flutter values: `DateTime`, milliseconds since epoch, and `TimeOfDay`. It supports custom labels, custom text styles, date ranges, Jalali conversion, and simple formatting helpers.
+
+<p align="center">
+  <img src="example/time.png" width="320" alt="Persian time picker">
+  <img src="example/date.png" width="320" alt="Persian date picker">
+</p>
+
+## At a Glance
+
+| Surface | What you get |
+|---------|--------------|
+| Jalali date picker | Numeric year, month, and day picker with Persian labels by default. |
+| Gregorian date picker | Same dialog shape with English labels and Gregorian date output. |
+| Time picker | 24-hour picker with valid `00:00` through `23:59` support. |
+| Range control | `firstDate` and `lastDate` clamp the selectable year, month, and day values. |
+| Styling | `PersianDateTimeStyle` controls accent color and text styles. |
+| Formatting helpers | `toPersianDate()`, `toFancyString()`, and `TimeOfDay.toFancyString()`. |
+
+## Quick Start
+
+Requirements: **Flutter >= 3.10** and **Dart >= 3.0**.
 
 ```yaml
 dependencies:
-  persian_datetimepickers: ^1.0.3
+  persian_datetimepickers: ^1.1.0
 ```
-
-**2. Import package:**
 
 ```dart
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 ```
 
-**3. Call the pickers where ever you want:**
+## Date Picker
+
+Default behavior: the picker opens in Jalali mode and returns a Gregorian `DateTime`.
 
 ```dart
-          onTap: () async {
-			// Time picker
-            final TimeOfDay? time = await showPersianTimePicker(
-              context: context,
-            );
+final date = await showPersianDatePicker(
+  context: context,
+  initialDate: DateTime.now(),
+  firstDate: DateTime(2020),
+  lastDate: DateTime(2035, 12, 31),
+);
 
-            setState(() {
-              _pickedTime = time;
-            });
-			
-			
-			// Date picker
-            final DateTime? date = await showPersianDatePicker(
-              context: context,
-            );
-
-            setState(() {
-              _pickedDate = date;
-            });
-          },
-		  
+if (date != null) {
+  print(date.toPersianDate());
+}
 ```
 
-## Developer
-By [Hossein Yousefpour](https://gabrimatic.info "Hossein Yousefpour")
+Use Gregorian mode when you want English labels and Gregorian number ranges:
 
-&copy; All rights reserved.
+```dart
+final date = await showPersianDatePicker(
+  context: context,
+  isJalali: false,
+  initialDate: DateTime(2024, 2, 29),
+);
+```
 
-## Donate
-* <a href="https://www.buymeacoffee.com/gabrimatic" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Book" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+Use the timestamp helper when storage needs milliseconds:
 
-OR
+```dart
+final timestamp = await showPersianDatePickerTimestamp(
+  context: context,
+  firstDate: DateTime(2020),
+  lastDate: DateTime(2035, 12, 31),
+);
+```
 
-* ETH Address: **0xc2F103b11C5d7bE3Abe292EE549a3ba418655A0E**
+## Time Picker
+
+Default behavior: the picker uses a 24-hour clock and returns `TimeOfDay`.
+
+```dart
+final time = await showPersianTimePicker(
+  context: context,
+  initialTime: const TimeOfDay(hour: 0, minute: 5),
+);
+
+if (time != null) {
+  print(time.toFancyString()); // 00:05
+}
+```
+
+## Labels
+
+Override any visible dialog label without replacing the picker UI:
+
+```dart
+await showPersianDatePicker(
+  context: context,
+  titleText: 'Select deadline',
+  yearLabelText: 'Year',
+  monthLabelText: 'Month',
+  dayLabelText: 'Day',
+  cancelText: 'Back',
+  saveText: 'Use date',
+);
+```
+
+The time picker accepts the same `titleText`, `cancelText`, and `saveText` parameters, plus `hourLabelText` and `minuteLabelText`.
+
+## Styling
+
+Set the accent color and text styles with `PersianDateTimeStyle`:
+
+```dart
+await showPersianDatePicker(
+  context: context,
+  persianDateTimeStyle: PersianDateTimeStyle(
+    color: Colors.purple,
+    headingStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+    titleStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+    numbersStyle: const TextStyle(fontSize: 16),
+  ),
+);
+```
+
+## Development
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+dart pub publish --dry-run
+```
+
+Run the example:
+
+```bash
+cd example
+flutter run
+```
+
+## Links
+
+[pub.dev](https://pub.dev/packages/persian_datetimepickers) · [GitHub](https://github.com/gabrimatic/persian_datetimepickers) · [Issues](https://github.com/gabrimatic/persian_datetimepickers/issues) · [More packages](https://pub.dev/publishers/gabrimatic.info/packages)

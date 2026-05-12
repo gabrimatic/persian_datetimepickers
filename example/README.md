@@ -1,6 +1,11 @@
-# example
+# Persian Datetime Pickers Example
 
-A new Flutter project.
+Small Flutter app that opens the package date and time pickers.
+
+```bash
+flutter pub get
+flutter run
+```
 
 ## Getting Started
 

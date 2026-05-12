@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-/// The custom extensions for DateTime
+/// Date formatting helpers.
 extension PersianTimeDatePickersDateTimeExtension on DateTime {
-  /// Converts the DateTime to a Persian date in String format.
+  /// Converts the DateTime to a Persian date string.
   ///
   /// Example: 1378/05/19
   String toPersianDate() {
@@ -11,7 +11,7 @@ extension PersianTimeDatePickersDateTimeExtension on DateTime {
     return '${date.year}/${date.month.toString().addExtraZero}/${date.day.toString().addExtraZero}';
   }
 
-  /// This method converts the DateTime to a fancy string.
+  /// Converts the DateTime to a readable date string.
   ///
   /// Example: شنبه، ۱۶ بهمن ۱۴۰۰
   String toFancyString({bool isJalali = true}) {
@@ -26,18 +26,16 @@ extension PersianTimeDatePickersDateTimeExtension on DateTime {
 }
 
 extension PersianTimeDatePickersTimeOfDayExtension on TimeOfDay {
-  /// This method converts the TimeOfDay to a fancy string.
+  /// Converts the TimeOfDay to an `HH:mm` string.
   ///
   /// Example: 16:05
   String toFancyString() {
-    return this.hour.toString().addExtraZero +
-        ':' +
-        this.minute.toString().addExtraZero;
+    return '${hour.toString().addExtraZero}:${minute.toString().addExtraZero}';
   }
 }
 
 extension PersianTimeDatePickersStringExtension on String {
-  /// This method add an extra zero to the beggining of an String
+  /// Adds a leading zero when the string has one character.
   ///
   /// Example: 1:5  ==>  01:05
   String get addExtraZero {

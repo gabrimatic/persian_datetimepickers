@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 void main() {
-  ThemeData themeData = ThemeData();
+  final themeData = ThemeData();
 
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const PersianDatePickersExample(),
       theme: themeData.copyWith(
         colorScheme: themeData.colorScheme.copyWith(
@@ -17,10 +18,10 @@ void main() {
 }
 
 class PersianDatePickersExample extends StatefulWidget {
-  const PersianDatePickersExample({Key? key}) : super(key: key);
+  const PersianDatePickersExample({super.key});
 
   @override
-  _PersianDatePickersExampleState createState() =>
+  State<PersianDatePickersExample> createState() =>
       _PersianDatePickersExampleState();
 }
 
@@ -31,44 +32,45 @@ class _PersianDatePickersExampleState extends State<PersianDatePickersExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pickers')),
-      body: Column(
+      appBar: AppBar(title: const Text('Persian datetime pickers')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
         children: <Widget>[
-          ListTile(
-            title: _pickedTime == null
-                ? const Text('Pick a time')
-                : const Text('Picked time:'),
-            trailing:
-                _pickedTime == null ? null : Text(_pickedTime!.toFancyString()),
-            onTap: () async {
-              final TimeOfDay? time = await showPersianTimePicker(
-                context: context,
-              );
+          Card(
+            child: ListTile(
+              title: const Text('Pick a time'),
+              subtitle: Text(_pickedTime?.toFancyString() ?? 'No time picked'),
+              onTap: () async {
+                final time = await showPersianTimePicker(
+                  context: context,
+                  initialTime: _pickedTime,
+                );
 
-              setState(() {
-                _pickedTime = time;
-              });
-            },
+                if (time != null) {
+                  setState(() => _pickedTime = time);
+                }
+              },
+            ),
           ),
-          const SizedBox(height: 16),
-          ListTile(
-            title: _pickedDate == null
-                ? const Text('Pick a date')
-                : const Text('Picked date:'),
-            trailing: _pickedDate == null
-                ? null
-                : Text(
-                    _pickedDate!.toFancyString(),
-                  ),
-            onTap: () async {
-              final DateTime? date = await showPersianDatePicker(
-                context: context,
-              );
+          Card(
+            child: ListTile(
+              title: const Text('Pick a Jalali date'),
+              subtitle: Text(
+                _pickedDate?.toFancyString() ?? 'No date picked',
+              ),
+              onTap: () async {
+                final date = await showPersianDatePicker(
+                  context: context,
+                  initialDate: _pickedDate,
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2035, 12, 31),
+                );
 
-              setState(() {
-                _pickedDate = date;
-              });
-            },
+                if (date != null) {
+                  setState(() => _pickedDate = date);
+                }
+              },
+            ),
           ),
         ],
       ),

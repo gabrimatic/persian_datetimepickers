@@ -9,14 +9,23 @@ Future<TimeOfDay?> showPersianTimePicker({
   TimeOfDay? initialTime,
   bool isJalali = true,
   PersianDateTimeStyle? persianDateTimeStyle,
+  String? titleText,
+  String? hourLabelText,
+  String? minuteLabelText,
+  String? cancelText,
+  String? saveText,
 }) async {
   TimeOfDay? picked;
-  final style = persianDateTimeStyle ??= PersianDateTimeStyle(
-    color: Theme.of(context).colorScheme.secondary,
-  )..saveButtonTextColor = Theme.of(context).colorScheme.secondary;
+  final style = persianDateTimeStyle ??
+      PersianDateTimeStyle(
+        color: Theme.of(context).colorScheme.secondary,
+      );
+  if (persianDateTimeStyle == null) {
+    style.saveButtonTextColor = Theme.of(context).colorScheme.secondary;
+  }
 
-  int hour = initialTime?.hour ?? TimeOfDay.now().hour;
-  int minute = initialTime?.minute ?? TimeOfDay.now().minute;
+  var hour = initialTime?.hour ?? TimeOfDay.now().hour;
+  var minute = initialTime?.minute ?? TimeOfDay.now().minute;
 
   await showDialog(
     context: context,
@@ -25,7 +34,7 @@ Future<TimeOfDay?> showPersianTimePicker({
         textDirection: isJalali ? TextDirection.rtl : TextDirection.ltr,
         child: AlertDialog(
           title: Text(
-            isJalali ? 'انتخاب ساعت' : 'Pick a time',
+            titleText ?? (isJalali ? 'انتخاب ساعت' : 'Pick a time'),
             style: style.headingStyle,
             textAlign: TextAlign.center,
           ),
@@ -35,7 +44,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                 Navigator.of(context, rootNavigator: true).pop();
               },
               child: Text(
-                isJalali ? 'لغو' : 'Cancel',
+                cancelText ?? (isJalali ? 'لغو' : 'Cancel'),
                 style: style.cancelButtonTextStyle,
               ),
             ),
@@ -46,7 +55,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                 Navigator.of(context, rootNavigator: true).pop();
               },
               child: Text(
-                isJalali ? 'ثبت' : 'Save',
+                saveText ?? (isJalali ? 'ثبت' : 'Save'),
                 style: style.saveButtonTextStyle,
               ),
             ),
@@ -63,7 +72,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text(
-                          isJalali ? 'ساعت' : 'Hour',
+                          hourLabelText ?? (isJalali ? 'ساعت' : 'Hour'),
                           style: style.titleStyle,
                         ),
                         Theme(
@@ -75,7 +84,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                             infiniteLoop: true,
                             textStyle: style.numbersStyle,
                             value: hour,
-                            minValue: 1,
+                            minValue: 0,
                             maxValue: 23,
                             onChanged: (value) => setState(() => hour = value),
                           ),
@@ -95,7 +104,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text(
-                          isJalali ? 'دقیقه' : 'Minute',
+                          minuteLabelText ?? (isJalali ? 'دقیقه' : 'Minute'),
                           style: style.titleStyle,
                         ),
                         Theme(

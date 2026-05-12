@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PersianDateTimeStyle {
-  /// This is the color of the numbers
+  /// The accent color used by the number pickers.
   ///
-  /// The default value is the app secondery color
+  /// By default, dialogs use the app secondary color.
   ///
-  /// You can set the secendery color like this:
+  /// Set the secondary color like this:
   /// ```dart
-  /// ThemeData themeData = ThemeData();
+  /// final themeData = ThemeData();
   /// MaterialApp(
   ///   home: const PersianDatePickersExample(),
   ///   theme: themeData.copyWith(
@@ -19,27 +19,19 @@ class PersianDateTimeStyle {
   /// ```
   final Color color;
 
-  /// The heading text style
-  ///
-  /// This is the main title on top of the dialog
+  /// The main title text style.
   final TextStyle headingStyle;
 
-  /// This is the title text style
-  ///
-  /// Title is the text that show on top of each numberpicker
-  ///
-  /// Example: "Year", "Minute" and etc
+  /// The label text style above each number picker.
   final TextStyle titleStyle;
 
-  /// This is the selected number text style
+  /// The selected number text style.
   final TextStyle numbersStyle;
 
-  /// This the text style of the cancel button
+  /// The cancel button text style.
   final TextStyle cancelButtonTextStyle;
 
-  /// The save button text style
-  ///
-  /// The default value is the app secondery color
+  /// The save button text style.
   TextStyle saveButtonTextStyle;
 
   PersianDateTimeStyle({
