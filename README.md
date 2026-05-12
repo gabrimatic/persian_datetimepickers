@@ -32,7 +32,7 @@ Requirements: **Flutter >= 3.10** and **Dart >= 3.0**.
 
 ```yaml
 dependencies:
-  persian_datetimepickers: ^1.1.0
+  persian_datetimepickers: ^1.1.1
 ```
 
 ```dart

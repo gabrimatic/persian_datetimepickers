@@ -1,6 +1,6 @@
 name: persian_datetimepickers
 description: Numeric Persian (Jalali) and Gregorian date and time pickers for Flutter.
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/gabrimatic/persian_datetimepickers
 repository: https://github.com/gabrimatic/persian_datetimepickers
 issue_tracker: https://github.com/gabrimatic/persian_datetimepickers/issues

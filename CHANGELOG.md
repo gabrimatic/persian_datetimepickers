@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Use a standard MIT license file so pub.dev recognizes the package license.
+
 ## 1.1.0
 
 - Update the package for Dart 3 and current Flutter stable.
