@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-import '../../persian_datetimepickers.dart';
+import '../style/style.dart';
 import '../utils/utils.dart';
 
 Future<int?> showPersianDatePickerTimestamp({
@@ -52,13 +52,8 @@ Future<DateTime?> showPersianDatePicker({
   String? saveText,
 }) async {
   DateTime? picked;
-  final style = persianDateTimeStyle ??
-      PersianDateTimeStyle(
-        color: Theme.of(context).colorScheme.secondary,
-      );
-  if (persianDateTimeStyle == null) {
-    style.saveButtonTextColor = Theme.of(context).colorScheme.secondary;
-  }
+  final style = resolvePickerStyle(context, persianDateTimeStyle);
+  final accentTheme = pickerAccentTheme(context, style.color);
 
   final range = _DatePickerRange.fromDates(
     isJalali: isJalali,
@@ -136,9 +131,7 @@ Future<DateTime?> showPersianDatePicker({
                           style: style.titleStyle,
                         ),
                         Theme(
-                          data: ThemeData(
-                            primarySwatch: getMaterialColor(style.color),
-                          ),
+                          data: accentTheme,
                           child: NumberPicker(
                             haptics: true,
                             infiniteLoop: true,
@@ -172,9 +165,7 @@ Future<DateTime?> showPersianDatePicker({
                           style: style.titleStyle,
                         ),
                         Theme(
-                          data: ThemeData(
-                            primarySwatch: getMaterialColor(style.color),
-                          ),
+                          data: accentTheme,
                           child: NumberPicker(
                             value: selected.month,
                             textStyle: style.numbersStyle,
@@ -206,9 +197,7 @@ Future<DateTime?> showPersianDatePicker({
                           style: style.titleStyle,
                         ),
                         Theme(
-                          data: ThemeData(
-                            primarySwatch: getMaterialColor(style.color),
-                          ),
+                          data: accentTheme,
                           child: NumberPicker(
                             value: selected.day,
                             textStyle: style.numbersStyle,

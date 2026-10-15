@@ -16,13 +16,8 @@ Future<TimeOfDay?> showPersianTimePicker({
   String? saveText,
 }) async {
   TimeOfDay? picked;
-  final style = persianDateTimeStyle ??
-      PersianDateTimeStyle(
-        color: Theme.of(context).colorScheme.secondary,
-      );
-  if (persianDateTimeStyle == null) {
-    style.saveButtonTextColor = Theme.of(context).colorScheme.secondary;
-  }
+  final style = resolvePickerStyle(context, persianDateTimeStyle);
+  final accentTheme = pickerAccentTheme(context, style.color);
 
   var hour = initialTime?.hour ?? TimeOfDay.now().hour;
   var minute = initialTime?.minute ?? TimeOfDay.now().minute;
@@ -76,9 +71,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                           style: style.titleStyle,
                         ),
                         Theme(
-                          data: ThemeData(
-                            primarySwatch: getMaterialColor(style.color),
-                          ),
+                          data: accentTheme,
                           child: NumberPicker(
                             haptics: true,
                             infiniteLoop: true,
@@ -108,9 +101,7 @@ Future<TimeOfDay?> showPersianTimePicker({
                           style: style.titleStyle,
                         ),
                         Theme(
-                          data: ThemeData(
-                            primarySwatch: getMaterialColor(style.color),
-                          ),
+                          data: accentTheme,
                           child: NumberPicker(
                             value: minute,
                             textStyle: style.numbersStyle,

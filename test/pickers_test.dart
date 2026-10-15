@@ -86,4 +86,57 @@ void main() {
       throwsArgumentError,
     );
   });
+
+  testWidgets('style color paints the selected numbers', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) => TextButton(
+            onPressed: () => showPersianTimePicker(
+              context: context,
+              initialTime: const TimeOfDay(hour: 10, minute: 30),
+              isJalali: false,
+              persianDateTimeStyle: PersianDateTimeStyle(color: Colors.purple),
+            ),
+            child: const Text('Open'),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Open'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is Text && widget.style?.color == Colors.purple,
+      ),
+      findsWidgets,
+    );
+  });
+
+  testWidgets('default style follows a dark theme', (tester) async {
+    final theme = ThemeData.dark();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: theme,
+        home: Builder(
+          builder: (context) => TextButton(
+            onPressed: () => showPersianDatePicker(
+              context: context,
+              isJalali: false,
+            ),
+            child: const Text('Open'),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Open'));
+    await tester.pumpAndSettle();
+
+    final heading = tester.widget<Text>(find.text('Pick a date'));
+    expect(heading.style?.color, theme.colorScheme.onSurface);
+  });
 }

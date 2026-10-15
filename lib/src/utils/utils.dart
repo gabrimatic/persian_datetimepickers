@@ -1,27 +1,40 @@
 import 'package:flutter/material.dart';
 
-MaterialColor getMaterialColor(Color color) {
-  final red = (color.r * 255.0).round().clamp(0, 255).toInt();
-  final green = (color.g * 255.0).round().clamp(0, 255).toInt();
-  final blue = (color.b * 255.0).round().clamp(0, 255).toInt();
+import '../style/style.dart';
 
-  Color shade(double opacity) {
-    return Color.fromARGB((opacity * 255).round(), red, green, blue);
-  }
+/// Returns [style], or a default style that follows the ambient theme.
+///
+/// The default uses the theme's secondary color as the accent and the
+/// theme's on-surface color for text, so dialogs stay readable in dark mode.
+PersianDateTimeStyle resolvePickerStyle(
+  BuildContext context,
+  PersianDateTimeStyle? style,
+) {
+  if (style != null) return style;
 
-  return MaterialColor(
-    color.toARGB32(),
-    {
-      50: shade(.1),
-      100: shade(.2),
-      200: shade(.3),
-      300: shade(.4),
-      400: shade(.5),
-      500: shade(.6),
-      600: shade(.7),
-      700: shade(.8),
-      800: shade(.9),
-      900: shade(1),
-    },
+  final colorScheme = Theme.of(context).colorScheme;
+  final defaults = PersianDateTimeStyle();
+  TextStyle onSurface(TextStyle textStyle) =>
+      textStyle.copyWith(color: colorScheme.onSurface);
+
+  return defaults.copyWith(
+    color: colorScheme.secondary,
+    headingStyle: onSurface(defaults.headingStyle),
+    titleStyle: onSurface(defaults.titleStyle),
+    numbersStyle: onSurface(defaults.numbersStyle),
+    cancelButtonTextStyle: onSurface(defaults.cancelButtonTextStyle),
+    saveButtonTextStyle: defaults.saveButtonTextStyle.copyWith(
+      color: colorScheme.secondary,
+    ),
+  );
+}
+
+/// The ambient theme with [color] as the secondary color.
+///
+/// `NumberPicker` paints the selected value with `colorScheme.secondary`.
+ThemeData pickerAccentTheme(BuildContext context, Color color) {
+  final theme = Theme.of(context);
+  return theme.copyWith(
+    colorScheme: theme.colorScheme.copyWith(secondary: color),
   );
 }
