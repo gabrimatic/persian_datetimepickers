@@ -1,3 +1,9 @@
+## 1.1.2
+
+- Fix `PersianDateTimeStyle.color` being ignored under Material 3: the selected numbers now use the style accent color again.
+- Keep the host app theme inside the pickers instead of replacing it with a bare `ThemeData`.
+- Default dialog text now follows the theme's on-surface color, so pickers stay readable in dark mode.
+
 ## 1.1.1
 
 - Use a standard MIT license file so pub.dev recognizes the package license.
