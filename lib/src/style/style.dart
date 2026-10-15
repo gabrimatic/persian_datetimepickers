@@ -25,7 +25,9 @@ class PersianDateTimeStyle {
   /// The label text style above each number picker.
   final TextStyle titleStyle;
 
-  /// The selected number text style.
+  /// The text style for the unselected numbers and the separators.
+  ///
+  /// The selected number is painted with [color].
   final TextStyle numbersStyle;
 
   /// The cancel button text style.
