@@ -3,12 +3,14 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns: ["*"]
   - package-ecosystem: "pub"
-    directory: "/"
+    directories: ["/", "/example"]
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/example"
-    schedule:
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      pub:
+        patterns: ["*"]
