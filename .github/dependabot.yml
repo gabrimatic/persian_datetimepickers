@@ -11,6 +11,9 @@ updates:
     directories: ["/", "/example"]
     schedule:
       interval: "monthly"
+    ignore:
+      # The example depends on the package by path.
+      - dependency-name: "persian_datetimepickers"
     groups:
       pub:
         patterns: ["*"]
